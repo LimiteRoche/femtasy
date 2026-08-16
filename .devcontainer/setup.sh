@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> [1/5] httpie"
+sudo apt-get update -qq && sudo apt-get install -y -qq httpie
+
+echo "==> [2/5] Angular CLI + opencode"
+sudo npm install -g @angular/cli opencode-ai
+
+echo "==> [3/5] k.to (fork de gentle-ai)"
+export GOPRIVATE=github.com/LimiteRoche/kto-ai/v2
+export PATH="$PATH:$(go env GOPATH)/bin"
+go install github.com/LimiteRoche/kto-ai/v2/cmd/gentle-ai@main
+
+echo "==> [4/5] Configurar k.to (opencode + Engram)"
+gentle-ai install --agent opencode --persona gentleman --preset full-gentleman --scope global
+
+echo "==> [5/5] Credenciales (desde GitHub secrets)"
+mkdir -p ~/.local/share/opencode
+cat > ~/.local/share/opencode/auth.json <<EOF
+{
+  "deepseek": {"type": "api", "key": "${DEEPSEEK_API_KEY}"},
+  "opencode-go": {"type": "api", "key": "${OPENCODE_GO_API_KEY}"}
+}
+EOF
+
+echo "==> Verificación final"
+node --version
+dotnet --version
+http --version
+opencode --version
+gentle-ai version
