@@ -15,7 +15,9 @@ go install github.com/LimiteRoche/kto-ai/v2/cmd/gentle-ai@main
 echo "==> [4/5] Configurar k.to (opencode + Engram)"
 gentle-ai install --agent opencode --persona gentleman --preset full-gentleman --scope global
 
-echo "==> [5/5] Credenciales (desde GitHub secrets)"
+echo "==> [5/5] Credenciales (desde secrets de Codespaces)"
+echo "  DEEPSEEK_API_KEY presente: $([ -n "${DEEPSEEK_API_KEY}" ] && echo SI || echo NO)"
+echo "  OPENCODE_GO_API_KEY presente: $([ -n "${OPENCODE_GO_API_KEY}" ] && echo SI || echo NO)"
 mkdir -p ~/.local/share/opencode
 cat > ~/.local/share/opencode/auth.json <<EOF
 {
