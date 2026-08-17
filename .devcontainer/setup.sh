@@ -9,7 +9,7 @@ npm install -g @angular/cli opencode-ai
 
 echo "==> [3/5] k.to (fork de gentle-ai)"
 export GOPRIVATE=github.com/LimiteRoche/kto-ai/v2
-export PATH="$PATH:$(go env GOPATH)/bin"
+export PATH="$PATH:$(go env GOPATH)/bin:$HOME/.local/bin"
 go install github.com/LimiteRoche/kto-ai/v2/cmd/gentle-ai@main
 
 echo "==> [4/5] Configurar k.to (opencode + Engram)"
