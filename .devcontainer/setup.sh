@@ -7,9 +7,10 @@ sudo apt-get update -qq && sudo apt-get install -y -qq httpie
 echo "==> [2/7] Angular CLI + opencode + spartan-mcp"
 npm install -g @angular/cli opencode-ai @spartan-ng/mcp
 
-echo "==> [3/7] Aspire CLI"
+echo "==> [3/7] Aspire CLI + dotnet-ef"
 curl -fsSL https://aspire.dev/install.sh | bash
 export PATH="$HOME/.aspire/bin:$PATH"
+dotnet tool install -g dotnet-ef 2>/dev/null || echo "dotnet-ef ya instalado"
 
 echo "==> [4/7] k.to (fork de gentle-ai)"
 export GOPRIVATE=github.com/LimiteRoche/kto-ai/v2
