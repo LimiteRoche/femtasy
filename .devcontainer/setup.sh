@@ -13,6 +13,7 @@ export PATH="$PATH:$(go env GOPATH)/bin:$HOME/.local/bin"
 go install github.com/LimiteRoche/kto-ai/v2/cmd/gentle-ai@main
 
 echo "==> [4/5] Configurar k.to (opencode + Engram)"
+export GENTLE_AI_NO_SELF_UPDATE=1
 timeout 300 gentle-ai install --agent opencode --persona gentleman --preset full-gentleman --scope global --opencode-background-subagents=off || echo "WARN: gentle-ai install no completó en 300s"
 
 echo "==> [5/5] Credenciales (desde secrets de Codespaces)"
