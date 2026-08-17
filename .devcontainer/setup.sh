@@ -5,7 +5,7 @@ echo "==> [1/5] httpie"
 sudo apt-get update -qq && sudo apt-get install -y -qq httpie
 
 echo "==> [2/5] Angular CLI + opencode"
-sudo npm install -g @angular/cli opencode-ai
+npm install -g @angular/cli opencode-ai
 
 echo "==> [3/5] k.to (fork de gentle-ai)"
 export GOPRIVATE=github.com/LimiteRoche/kto-ai/v2
