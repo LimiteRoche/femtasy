@@ -33,6 +33,13 @@ def main() -> int:
     if "kto-orchestrator" in agents:
         agents["kto-orchestrator"]["model"] = "opencode-go/deepseek-v4-pro"
 
+    # Segundo orquestador: DeepSeek directo (emergencia), mismo prompt que el base.
+    if "kto-orchestrator" in agents and "kto-orchestrator-direct" not in agents:
+        direct = json.loads(json.dumps(agents["kto-orchestrator"]))
+        direct["model"] = "deepseek/deepseek-v4-pro"
+        direct["description"] = "k.to SDD Orchestrator (DeepSeek direct)"
+        agents["kto-orchestrator-direct"] = direct
+
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2)
 
