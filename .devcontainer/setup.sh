@@ -21,6 +21,12 @@ echo "==> [5/7] Configurar k.to (opencode + Engram)"
 export GENTLE_AI_NO_SELF_UPDATE=1
 timeout 300 gentle-ai install --agent opencode --persona gentleman --preset full-gentleman --scope global --opencode-background-subagents=off || echo "WARN: gentle-ai install no completó en 300s"
 
+echo "==> [5b/7] Perfil flash (todos los agentes en DeepSeek flash)"
+gentle-ai sync --profile flash:deepseek/deepseek-v4-flash
+for phase in sdd-init sdd-explore sdd-propose sdd-spec sdd-design sdd-tasks sdd-apply sdd-verify sdd-archive sdd-onboard; do
+  gentle-ai sync --profile-phase flash:$phase:deepseek/deepseek-v4-flash
+done
+
 echo "==> [6/7] MCPs + orquestadores (angular-cli, aspire, spartan-ui)"
 python3 .devcontainer/configure-opencode.py
 

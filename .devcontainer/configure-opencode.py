@@ -40,6 +40,18 @@ def main() -> int:
         direct["description"] = "k.to SDD Orchestrator (DeepSeek direct)"
         agents["kto-orchestrator-direct"] = direct
 
+    # Tercer orquestador (perfil flash): todos los agentes en DeepSeek flash.
+    # El perfil lo genera `gentle-ai sync --profile flash:...` con el nombre
+    # sdd-orchestrator-flash; aquí lo renombramos a la marca k.to.
+    if "sdd-orchestrator-flash" in agents and "kto-orchestrator-flash" not in agents:
+        agents["kto-orchestrator-flash"] = agents.pop("sdd-orchestrator-flash")
+        agents["kto-orchestrator-flash"]["prompt"] = (
+            agents["kto-orchestrator-flash"]
+            .get("prompt", "")
+            .replace("`kto-orchestrator`", "`kto-orchestrator-flash`")
+        )
+        agents["kto-orchestrator-flash"]["description"] = "k.to SDD Orchestrator (DeepSeek Flash)"
+
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2)
 
